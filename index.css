@@ -682,6 +682,9 @@ h1, h2, h3 {
     .footer-down ul {
         text-align: center;
     }
+    .footer-down h4 {
+        text-align: center
+    }
     .footer-bottom {
         flex-direction: column;
         gap: 15px;
