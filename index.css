@@ -1,0 +1,735 @@
+/* --- Variables & Reset --- */
+:root {
+    /* Palette */
+    --primary: #6366f1;       /* Indigo */
+    --primary-hover: #4f46e5;
+    --accent: #8b5cf6;        /* Violet */
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --glass: rgba(255, 255, 255, 0.85);
+    
+    /* Fonts */
+    --font-head: 'Poppins', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+    
+    /* Spacing */
+    --nav-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-head);
+    font-weight: 700;
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.logo img {
+    border-radius: 8px;
+    height: 9rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    position: relative; /* Added for pseudo-element positioning */
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+/* --- Added: Cool Underline Animation --- */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%; /* Center the starting point */
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateX(-50%); /* Ensure it stays centered */
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Expands to full width on hover */
+    left: 50%;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Typography */
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.highlight {
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-tagline {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tool-card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+}
+
+.tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+    border-color: var(--primary);
+}
+
+.icon-box {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* State Management Styles */
+.view-state {
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.view-state.active {
+    display: block;
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Tool Interface Styles (State 2 & 3) */
+.upload-zone {
+    border: 3px dashed var(--primary);
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 20px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: var(--gray);
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.upload-zone:hover {
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1rem;
+    font-family: var(--font-body);
+}
+
+.back-btn:hover {
+    color: var(--primary);
+}
+
+/* Background Blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    bottom: -50px;
+    right: -50px;
+}
+
+/* --- About Section --- */
+.about-section {
+    padding: 80px 20px;
+    background: white;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center; /* Ensures content is centered */
+}
+
+/* --- Added: Gradient Section Title --- */
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    display: inline-block; /* Required for centering background clip on some browsers */
+    
+    /* Gradient Logic */
+    background-image: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    text-align: left; /* Keep card content left aligned if preferred, or center */
+}
+
+.about-card {
+    padding: 30px;
+    border-radius: 16px;
+    background: var(--light);
+    transition: transform 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-5px); /* Gentle hover effect for cards too */
+}
+
+.about-card h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.about-card p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    /* Adjust Hero Title size */
+    .hero-title { 
+        font-size: 2.2rem; 
+    }
+    
+    /* Stack the cards vertically */
+    .card-grid { 
+        grid-template-columns: 1fr; 
+    }
+    
+    /* --- Navbar Fixes --- */
+    .navbar {
+        padding: 0 10px; /* Reduce side padding */
+    }
+
+    .nav-container {
+        width: 100%; /* Use full width */
+    }
+
+    .logo {
+        font-size: 1rem; /* Slightly smaller logo text */
+    }
+
+    .nav-links {
+        display: flex; /* Bring the links back! */
+        gap: 15px;     /* Reduce gap between items */
+    }
+
+    .nav-links a {
+        font-size: 0.9rem; /* Slightly smaller link text */
+    }
+}
+
+/* --- About Description Styling --- */
+.about-description {
+    max-width: 800px;
+    margin: 0 auto 50px auto; /* Centers the block and adds space below */
+    line-height: 1.8;
+    color: var(--gray);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.about-description strong {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* --- Wave/Swirl Word Reveal --- */
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Space between the swirling words */
+    perspective: 1000px;
+}
+
+.swirl-word {
+    display: inline-block;
+    opacity: 0;
+    
+    /* Gradient Styling */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation 
+       The delay is (index * 0.2s), creating the "follow shortly" wave effect
+    */
+    animation: wordSwirl 6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes wordSwirl {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) rotateX(-90deg) rotateZ(-15deg);
+        filter: blur(8px);
+    }
+    /* Words snap into place one by one */
+    10%, 80% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg) rotateZ(0deg);
+        filter: blur(0);
+    }
+    /* Smooth fade out before restart */
+    90%, 100% {
+        opacity: 0;
+        transform: translateY(-20px);
+        filter: blur(4px);
+    }
+}
+
+/* Ensure words don't wrap awkwardly on small screens */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        flex-wrap: wrap; /* Allows them to stack if the screen is very narrow */
+        gap: 10px;
+    }
+}
+
+.upload-zone.dragging {
+    background: rgba(99, 102, 241, 0.2);
+    border-style: solid;
+    transform: scale(1.02);
+}
+
+/* --- Upload Zone Cursor --- */
+.upload-zone {
+    cursor: pointer; /* Requirement 1: Pointer cursor in selection area */
+    transition: all 0.3s ease;
+}
+
+/* --- Convert Button Styling --- */
+.convert-btn {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-family: var(--font-head);
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    background: #d1d5db; /* Initial Grey */
+    cursor: not-allowed;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Requirement 2: Active Gradient State */
+.convert-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.convert-btn.active:hover {
+    filter: brightness(1.1);
+    transform: translateY(-4px);
+}
+
+.convert-btn.active:active {
+    transform: translateY(0);
+}
+
+/* --- Contact Section --- */
+.contact-section {
+    padding: 100px 20px;
+    background: var(--light);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Contact Visual (Animated Art) */
+.contact-visual {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orbit {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed var(--primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotateOrbit 10s linear infinite;
+    position: relative;
+}
+
+.planet {
+    font-size: 4rem;
+    animation: counterRotate 10s linear infinite;
+}
+
+.satellite {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+@keyframes rotateOrbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes counterRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/* Contact Card */
+.contact-card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    text-align: center;
+    z-index: 2;
+}
+
+.contact-text {
+    color: var(--gray);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* GitHub Button */
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #24292e; /* GitHub Black */
+    color: white;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: var(--font-head);
+    transition: all 0.3s ease;
+}
+
+.github-btn img {
+    width: 24px;
+    filter: invert(1);
+}
+
+.github-btn:hover {
+    background: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 30px 20px;
+    }
+}
+
+/* --- Updated Footer Styles --- */
+.main-footer {
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 30px 10px 15px 8px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Pushes brand to left, project to right */
+    gap: 20px;
+}
+
+.footer-brand p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    max-width: 250px;
+    line-height: 1.2;
+    margin-top: 5px;
+}
+
+.footer-down h4 {
+    font-family: var(--font-head);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.footer-down ul {
+    list-style: none;
+    text-align: right; /* Aligns links to the right for a clean edge */
+}
+
+.footer-down ul li {
+    margin-bottom: 12px;
+}
+
+.footer-down ul li a {
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+/* .footer-down ul li a:hover {
+    color: var(--primary);
+} */
+
+.footer-down ul li a:hover {
+    color: #8544f5;
+    text-shadow: 0 0 45px #a34dff, 0 5 15px #a033ff87;
+    background: rgba(154, 77, 255, 0.05);
+}
+
+.footer-bottom {
+    max-width: 1100px;
+    margin: 45px auto 0 auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-copyright {
+    color: var(--gray);
+    font-size: 0.85rem;
+}
+
+/* --- The Glow Accent --- */
+.dev-name {
+    color: #ff4d4d; /* Red Accent */
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 2px 2px;
+    border-radius: 4px;
+}
+
+.dev-name:hover {
+    color: #ff3385; /* Pinkish-Red on hover */
+    text-shadow: 0 0 8px #ff4d4d, 0 0 15px #ff338587;
+    background: rgba(255, 77, 77, 0.05);
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-down ul {
+        text-align: center;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* --- Developer Brand Styling --- */
+.dev-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dev-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px; /* Matching the app's logo style */
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+}
+
+/* Hovering over the brand area affects both logo and name */
+.dev-brand:hover .dev-logo {
+    transform: scale(1.4);
+    border-color: #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+}
+
+.dev-brand:hover .dev-name {
+    color: #ff3385;
+    text-shadow: 0 0 12px #ff4d4d, 0 0 25px #ff3385;
+}
+
+/* Mobile Alignment */
+@media (max-width: 768px) {
+    .dev-brand {
+        justify-content: center;
+    }
+}
+
+html{
+    scroll-behavior: smooth;
+}
+.footer-brand a{
+    transition: all ease-in-out 0.2s;
+}
+
+.footer-brand a:hover{
+    transform: scale(1.2);
+}

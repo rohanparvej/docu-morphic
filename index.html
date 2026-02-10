@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docu-Morphic | Modern Document Converter</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img href="#" src="assets/docu-morphic-logo-final.png" alt="Docu-Morphic">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-section" id="hero">
+        <div class="hero-container">
+            
+            <div class="view-state active" id="view-selection">
+                <h1 class="hero-title">Transform Your Files <br> <span class="highlight">Instantly.</span></h1>
+                <p class="hero-tagline">Secure, fast, and high-quality file conversion tools for everyone.</p>
+                
+                <div class="card-grid">
+                    <div class="tool-card" onclick="switchMode('image')">
+                        <div class="icon-box">🖼️</div>
+                        <h3>Image Convert</h3>
+                        <p>JPG, PNG, WEBP & PDF</p>
+                    </div>
+
+                    <div class="tool-card" onclick="switchMode('document')">
+                        <div class="icon-box">📄</div>
+                        <h3>Document Convert</h3>
+                        <p>PDF to TXT / TXT to PDF</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-state" id="view-image-tool">
+                <button class="back-btn" onclick="goBack()">← Back to Selection</button>
+                <h2 class="tool-title">Image Converter Studio</h2>
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <div class="upload-zone" id="imageDropZone">
+                    <p id="imageStatus">Drop your <strong>Images</strong> here or click to browse</p>
+                </div>
+                <div class="format-select">
+                    <label for="imageFormat">Convert to:</label>
+                    <select id="imageFormat">
+                        <option value="image/png">PNG (lossless)</option>
+                        <option value="image/jpeg">JPEG</option>
+                        <option value="image/webp">WEBP</option>
+                        <option value="application/pdf">PDF Document</option>
+                    </select>
+                </div>
+                <button id="imageConvertBtn" class="convert-btn" disabled>Convert Image</button>
+            </div>
+
+            <div class="view-state" id="view-doc-tool">
+                <button class="back-btn" onclick="goBack()">← Back to Selection</button>
+                <h2 class="tool-title">Document Processor</h2>
+                <input type="file" id="docInput" accept=".pdf, .txt" hidden>
+                <div class="upload-zone" id="docDropZone">
+                    <p id="docStatus">Drop your <strong>Documents</strong> here or click to browse</p>
+                </div>
+                <div class="format-chooser">
+                    <label for="docFormat">Convert to</label>
+                    <select id="docFormat">
+                        <option value="" disabled selected>Select format</option>
+                        <option value="txt">TXT (Text)</option>
+                        <option value="pdf">PDF</option>
+                    </select>
+                </div>
+                <button id="docConvertBtn" class="convert-btn" disabled>Convert Document</button>
+            </div>
+        </div>
+        
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </header>
+
+    <section class="about-section" id="about">
+
+        <div class="container">
+
+            <h2 class="section-title">
+
+                <span class="swirl-word" style="--i:1">Why</span>
+
+                <span class="swirl-word" style="--i:2">Choose</span>
+
+                <span class="swirl-word" style="--i:3">Docu-Morphic?</span>
+
+            </h2>
+
+           
+
+            <div class="about-description">
+
+                <p>
+
+                    Docu-Morphic was born out of a desire to simplify the digital workflow. In a world where file compatibility can be a roadblock, this tool provides a seamless, <strong>browser-based solution</strong> that eliminates the need for bulky software installations. Whether you are a student rushing to submit a PDF or a designer optimizing web assets, our architecture is built to handle your files with precision, speed, and absolute privacy.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="about-grid">
+
+                <div class="about-card">
+
+                    <h3>⚡ Blazing Fast</h3>
+
+                    <p>Optimized algorithms ensure your files are converted in seconds, not minutes.</p>
+
+                </div>
+
+                <div class="about-card">
+
+                    <h3>🔒 Privacy First</h3>
+
+                    <p>We do not store your files. No documents leave your browser. Everything is converted on the client-side.</p>
+
+                </div>
+
+                <div class="about-card">
+
+                    <h3>✨ High Quality</h3>
+
+                    <p>Lossless compression and high-fidelity conversion for professional results.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="contact-section" id="contact">
+    <div class="container">
+        <h2 class="section-title">
+            <span class="swirl-word" style="--i:1">Let's</span>
+            <span class="swirl-word" style="--i:2">Stay</span>
+            <span class="swirl-word" style="--i:3">Connected</span>
+        </h2>
+
+        <div class="contact-container">
+            <div class="contact-visual">
+                <div class="orbit">
+                    <div class="planet">📩</div>
+                    <div class="satellite"></div>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <p class="contact-text">
+                    Docu-Morphic is an open-source project built for the community. 
+                    Have a feature request, found a bug, or just want to see how the gears turn? 
+                    The entire source code is available for you to explore.
+                </p>
+                
+                <a href="https://github.com/yourusername/your-repo" target="_blank" class="github-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <a href="#" class="logo">
+                <img src="assets/docu-morphic-logo-final.png" alt="Docu-Morphic">
+            </a>
+            <p>Privacy-focused, browser-based file transformations.</p>
+        </div>
+
+        <div class="footer-down">
+            <h4>Project</h4>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://github.com/yourusername/your-repo" target="_blank">GitHub Source</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+    <div class="dev-brand">
+        <img src="assets/codex-icon.png" alt="Dev Logo" class="dev-logo">
+        <p>Developed by rohan @<span class="dev-name">codeX</span></p>
+    </div>
+    <div class="footer-copyright">
+        &copy; 2026 Docu-Morphic. Open Source.
+    </div>
+</div>
+</footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script type="module" src="converter.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
