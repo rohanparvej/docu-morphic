@@ -1,6 +1,10 @@
 /* =========================================================
    IMAGE CONVERSION
 ========================================================= */
+const pdfjsLib = window['pdfjs-dist/build/pdf'];
+// This line is crucial for the PDF engine to run without errors
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
 
 export async function convertImage(file, targetType, quality = 0.92) {
     return new Promise((resolve, reject) => {
