@@ -3,7 +3,7 @@
 A **privacy-first, fully client-side document & image converter** built with **pure HTML, CSS, and JavaScript**.  
 No backend. No uploads. No tracking. Everything runs **locally in your browser**.
 
-[**🚀 View Live Demo**](https://yourusername.github.io/docu-morphic/)
+[**🚀 View Live Demo**](https://rohanparvej.github.io/docu-morphic/)
 
 ---
 
@@ -58,16 +58,16 @@ All libraries are **MIT/Apache licensed**, making this project 100% Open Source.
 ├── converter.js        # Core conversion logic (Pure functions)
 └── README.md           # Documentation
 ```
-
-🚀 How It Works
+---
+##🚀 How It Works
 Selection: User selects or drags a file into the workspace.
 Validation: JavaScript validates the MIME-type and file size.
 Transformation:
 Images are rendered to an invisible <canvas> and re-encoded.
 PDFs are parsed page-by-page to extract text strings.
 Delivery: A local Blob URL is generated, and a download event is triggered.
-
-⚠️ Limitations & Roadmap
+---
+##⚠️ Limitations & Roadmap
 Current Capabilities:
 ✅ Image → Image (PNG, JPG, WEBP)
 
@@ -76,8 +76,8 @@ Current Capabilities:
 ✅ PDF → TXT
 
 ✅ TXT → PDF
-
-Roadmap:
+---
+##Roadmap:
 🛠 Batch Conversion: Convert multiple images at once.
 
 🛠 PWA Support: Fully offline capability using Service Workers.
@@ -85,8 +85,8 @@ Roadmap:
 🛠 Dark Mode: System-preference-based theme switching.
 
 🛠 Advanced PDF: Image-based PDF to OCR (experimental).
-
-🧪 Why No Backend?
+---
+##🧪 Why No Backend?
 This project intentionally avoids servers to:
 
 Maximize Privacy: Guaranteed security for sensitive documents.
