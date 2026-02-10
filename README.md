@@ -60,12 +60,13 @@ All libraries are **MIT/Apache licensed**, making this project 100% Open Source.
 ```
 ---
 ### 🚀 How It Works
-Selection: User selects or drags a file into the workspace.
-Validation: JavaScript validates the MIME-type and file size.
-Transformation:
-Images are rendered to an invisible <canvas> and re-encoded.
-PDFs are parsed page-by-page to extract text strings.
-Delivery: A local Blob URL is generated, and a download event is triggered.
+
+#### Selection: User selects or drags a file into the workspace.
+#### Validation: JavaScript validates the MIME-type and file size.
+#### Transformation: Images are rendered to an invisible <canvas> and re-encoded.
+#### PDFs are parsed page-by-page to extract text strings.
+#### Delivery: A local Blob URL is generated, and a download event is triggered.
+
 ---
 ## ⚠️ Limitations & Roadmap
 Current Capabilities:
